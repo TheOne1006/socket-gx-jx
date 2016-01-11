@@ -38,6 +38,8 @@
 // pro 123.57.47.119
   var chat = io.connect('http://123.57.47.119:8036/chat'),
   news = io.connect('http://123.57.47.119:8036/news');
+  // var chat = io.connect('http://localhost:8036/chat'),
+  // news = io.connect('http://localhost:8036/news');
   
   // chat.on('connect', function () {
   //   chat.on('getParams', function (data) {
@@ -69,6 +71,7 @@ news.on('connect', function (data) {
     })
     .done(function(res) {
     	var socketRes = false;
+    	console.log('ajax.end');
 
     	$('#result').text(res);
 
