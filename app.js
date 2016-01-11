@@ -52,10 +52,11 @@ var news = io
    });
   });
 
-app.post('/success', function (req, res) {
+app.post('/success/:serno', function (req, res) {
 	reObj.set(false);
+	console.log(req.params.serno);
 	console.log(req.body);
-	news.emit('getParams', req.body);
+	news.emit('getParams', {serno:req.params.serno, postdata: req.body});
 
 	setTimeout(function () {
 		if(reObj.get()){
@@ -72,7 +73,6 @@ app.post('/success', function (req, res) {
 // 	io.emit('getParams', { hello: 'get' });
 // 	res.end('success');
 // });
-
 
 
 
