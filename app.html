@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>app</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<script src="bower_components/angular/angular.js"></script>
+</head>
+<body ng-app>
+	<div class="container">
+		<div class="col-md-6">
+		<h1>get params</h1>
+			<div id='params' >
+
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h1>send result</h1>
+			<div id='result'>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<!-- <script src="http://localhost:3000/js/socket.io.js"></script>
+<script src="http://localhost:3000/bower_components/jquery/dist/jquery.min.js"></script> -->
+
+<script src="/js/socket.io.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+<script>
+  var chat = io.connect('http://localhost:8036/chat'),
+  news = io.connect('http://localhost:8036/news');
+  
+  // chat.on('connect', function () {
+  //   chat.on('getParams', function (data) {
+  //     console.log(data);
+  //     chat.emit('my other event', 'close');
+  //   });
+  //   chat.emit('my other event', 'dddd');
+  // });
+  
+  // news.on('connect', function (data) {
+  //   news.on('newBegin', function (data) {
+  //   	console.log(data);
+  //   });
+  //   news.emit('item', 'news is work');
+  // });
+
+news.on('connect', function (data) {
+
+   news.on('getParams' , function (data) {
+   $('#params').text(JSON.stringify(data, ' ', 4));
+
+    $.ajax({
+    	url: 'http://www.gxd-jx.com/socket/t',
+    	type: 'post',
+    	dataType: 'json',
+    	data: data,
+    })
+    .done(function(res) {
+    	console.log('post /socket/t over');
+
+    	$('#result').text(JSON.stringify(res, ' ', 4));
+    	news.emit('endend', {res:true});
+    });
+   });
+
+  });
+
+</script>
+<!--  <script>
+ $(function ($) {
+  var socket = io.connect('http://localhost:8036/');
+  socket.on('news', function (data) {
+    console.log(data);
+     socket.emit('my other event', { my: 'data' });
+  });
+
+  socket.on('getParams', function (data) {
+
+  	console.log(data);
+    $.ajax({
+    	url: 'http://www.gxd-jx.com/socket/t',
+    	type: 'post',
+    	dataType: 'json',
+    	data: data,
+    })
+    .done(function(res) {
+    	console.log('post /socket/t over');
+    	console.log(res);
+    	socket.emit('getParamsEnd', res);
+    });
+
+  });
+
+ });
+</script> -->

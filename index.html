@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>socket.io</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+ <script>
+  var socket = io.connect();
+  socket.on('news', function (data) {
+    console.log(data);
+     socket.emit('my other event', { my: 'data' });
+  });
+
+  socket.on('getParams', function (data) {
+    console.log(data);
+  });
+</script>
