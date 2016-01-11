@@ -46,6 +46,8 @@ var news = io
   .of('/news')
   .on('connection', function (socket) {
    socket.on('endend', function (data) {
+   	console.log('返回南昌银行信息');
+   	console.log(data);
    	if(data.res){
    	reObj.set(true);
    	}
