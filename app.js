@@ -79,6 +79,8 @@ app.post('/success/:serno', function (req, res) {
 
 
 app.use('/bower_components', express.static('./bower_components'));
+app.use('/css', express.static('./css'));
+app.use('/js', express.static('./js'));
 
 
 app.set('port', process.env.PORT || 8036);
