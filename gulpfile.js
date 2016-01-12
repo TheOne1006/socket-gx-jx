@@ -26,14 +26,7 @@ gulp.task('browser-sync', function() {
 
     browserSync.init({
         // 服务开启地址
-        server: './',
-        index: "app.html",
-        directory: false,
-        // Linux
-        // browser: ["chromium-browser"]
-        // Mac
-        // browser: ["Google Chrome", "firefox"]
-        // browser: ["Google Chrome"]
+        proxy: "http://localhost:8036"
     });
 
 });

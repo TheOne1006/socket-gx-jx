@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>socket.io</title>
+  <meta charset="UTF-8">
+  <title>app</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <style>
+  #params,#result {
+    word-break:break-all;
+  }
+  </style>
 </head>
-<body>
-	
+<body ng-app>
+  <div class="container">
+    <div class="col-md-6">
+    <h1>get params</h1>
+      <div id='params' >
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1>send result</h1>
+      <div id='result'>
+        
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+<!-- <script src="http://localhost:3000/js/socket.io.js"></script>
+<script src="http://localhost:3000/bower_components/jquery/dist/jquery.min.js"></script> -->
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
- <script>
-  var socket = io.connect();
-  socket.on('news', function (data) {
-    console.log(data);
-     socket.emit('my other event', { my: 'data' });
+
+<script>
+// pro 123.57.47.119
+  // var chat = io.connect('http://123.57.47.119:8036/chat'),
+  // news = io.connect('http://123.57.47.119:8036/news');
+
+  var chat = io.connect('http://localhost:8036/chat'),
+  news = io.connect('http://localhost:8036/news');
+
+news.on('connect', function (data) {
+
+   news.on('getParams' , function (data) {
+   var serno = data.serno;
+   var postdata = data.postdata;
+   $('#params').text(JSON.stringify(postdata, ' ', 4));
+   var url = 'http://www.gxd-jx.com/ncbank/tender_notify/do_tender/'+serno;
+    $.ajax({
+      url: url,
+      type: 'post',
+      dataType: 'json',
+      data: postdata
+    })
+    .done(function(res) {
+      var socketRes = false;
+      console.log('ajax.end');
+
+      $('#result').text(res);
+
+      if(res == 'success') {
+         console.log('成功返回success');
+         socketRes = true;
+      }
+
+      news.emit('endend', {res:socketRes});
+    });
+   });
+
   });
 
-  socket.on('getParams', function (data) {
-    console.log(data);
-  });
 </script>
