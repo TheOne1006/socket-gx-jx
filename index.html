@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>app</title>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <script src="bower_components/angular/angular.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.css">
   <style>
   #params,#result {
     word-break:break-all;
   }
   </style>
 </head>
-<body ng-app>
+<body>
   <div class="container">
     <div class="col-md-6">
     <h1>get params</h1>
@@ -30,17 +29,14 @@
 <!-- <script src="http://localhost:3000/js/socket.io.js"></script>
 <script src="http://localhost:3000/bower_components/jquery/dist/jquery.min.js"></script> -->
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/js/socket.io.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
 <script>
 // pro 123.57.47.119
-  // var chat = io.connect('http://123.57.47.119:8036/chat'),
-  // news = io.connect('http://123.57.47.119:8036/news');
-
-  var chat = io.connect('http://localhost:8036/chat'),
-  news = io.connect('http://localhost:8036/news');
+  var chat = io.connect('http://123.57.47.119:8036/chat'),
+  news = io.connect('http://123.57.47.119:8036/news');
 
 news.on('connect', function (data) {
 
