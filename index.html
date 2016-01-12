@@ -48,7 +48,6 @@ news.on('connect', function (data) {
     $.ajax({
       url: url,
       type: 'post',
-      dataType: 'json',
       data: postdata
     })
     .done(function(res) {
