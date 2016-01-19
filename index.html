@@ -38,9 +38,13 @@
   var chat = io.connect('http://123.57.47.119:8036/chat'),
   news = io.connect('http://123.57.47.119:8036/news');
 
-news.on('connect', function (data) {
+  // var chat = io.connect('http://localhost:8036/chat'),
+  // news = io.connect('http://localhost:8036/news');
 
+news.on('connect', function (data) {
+   console.log('news contents start');
    news.on('getParams' , function (data) {
+   console.log('news getParams start');
    var serno = data.serno;
    var postdata = data.postdata;
    $('#params').text(JSON.stringify(postdata, ' ', 4));
